@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anvi & Anuj Wedding Invite</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #f8f4ef;
+    overflow-x: hidden;
+    font-family: "Georgia", serif;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 40px 0;
+}
+
+.page {
+    width: min(95vw, 900px);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 1s ease forwards;
+    background: white;
+}
+
+.page img {
+    width: 100%;
+    display: block;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    background: rgba(255,255,255,0.7);
+    border-radius: 999px;
+    padding: 12px 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+.music-control:hover {
+    transform: scale(1.05);
+}
+
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #f8f4ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+@media (max-width: 768px) {
+    .container {
+        gap: 24px;
+        padding: 20px 0;
+    }
+
+    .page {
+        width: 96vw;
+        border-radius: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">Loading Invitation...</div>
+
+<div class="music-control" id="musicBtn">
+🔊 Music On
+</div>
+
+<audio id="bgMusic" autoplay loop>
+    <source src="assets/background-music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <div class="page" style="animation-delay:0.0s;">
+        <img src="assets/page_1.jpg" alt="Wedding Invite Page 1">
+    </div>
+    
+    <div class="page" style="animation-delay:0.08s;">
+        <img src="assets/page_2.jpg" alt="Wedding Invite Page 2">
+    </div>
+    
+    <div class="page" style="animation-delay:0.16s;">
+        <img src="assets/page_3.jpg" alt="Wedding Invite Page 3">
+    </div>
+    
+    <div class="page" style="animation-delay:0.24s;">
+        <img src="assets/page_4.jpg" alt="Wedding Invite Page 4">
+    </div>
+    
+    <div class="page" style="animation-delay:0.32s;">
+        <img src="assets/page_5.jpg" alt="Wedding Invite Page 5">
+    </div>
+    
+    <div class="page" style="animation-delay:0.4s;">
+        <img src="assets/page_6.jpg" alt="Wedding Invite Page 6">
+    </div>
+    
+    <div class="page" style="animation-delay:0.48s;">
+        <img src="assets/page_7.jpg" alt="Wedding Invite Page 7">
+    </div>
+    
+    <div class="page" style="animation-delay:0.56s;">
+        <img src="assets/page_8.jpg" alt="Wedding Invite Page 8">
+    </div>
+    
+    <div class="page" style="animation-delay:0.64s;">
+        <img src="assets/page_9.jpg" alt="Wedding Invite Page 9">
+    </div>
+    
+    <div class="page" style="animation-delay:0.72s;">
+        <img src="assets/page_10.jpg" alt="Wedding Invite Page 10">
+    </div>
+    
+    <div class="page" style="animation-delay:0.8s;">
+        <img src="assets/page_11.jpg" alt="Wedding Invite Page 11">
+    </div>
+    
+    <div class="page" style="animation-delay:0.88s;">
+        <img src="assets/page_12.jpg" alt="Wedding Invite Page 12">
+    </div>
+    
+    <div class="page" style="animation-delay:0.96s;">
+        <img src="assets/page_13.jpg" alt="Wedding Invite Page 13">
+    </div>
+    
+    <div class="page" style="animation-delay:1.04s;">
+        <img src="assets/page_14.jpg" alt="Wedding Invite Page 14">
+    </div>
+    
+</div>
+
+<script>
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+const loader = document.getElementById('loader');
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        loader.classList.add('fade-out');
+    }, 1200);
+
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                musicBtn.innerHTML = '🔊 Music On';
+            })
+            .catch(() => {
+                musicBtn.innerHTML = '▶ Tap for Music';
+            });
+    }
+});
+
+musicBtn.addEventListener('click', () => {
+    if (music.paused) {
+        music.play();
+        musicBtn.innerHTML = '🔊 Music On';
+    } else {
+        music.pause();
+        musicBtn.innerHTML = '🔇 Music Off';
+    }
+});
+</script>
+
+</body>
+</html>

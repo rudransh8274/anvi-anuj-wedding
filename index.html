@@ -60,7 +60,7 @@ OPENING SCREEN
     align-items:center;
     justify-content:center;
     flex-direction:column;
-    z-index:9999;
+    z-index:9997;
     overflow:hidden;
     transition:1.2s ease;
 }
@@ -79,6 +79,7 @@ FLOATING ELEMENTS
     inset:0;
     overflow:hidden;
     pointer-events:none;
+    z-index:9998;
 }
 
 .flower,
@@ -277,6 +278,8 @@ MAIN WEBSITE
     align-items:center;
     gap:40px;
     padding:40px 0;
+    position:relative;
+    z-index:1;
 }
 
 /* Pages */
@@ -290,6 +293,8 @@ MAIN WEBSITE
     transform:translateY(30px);
     animation:fadeUp 1s ease forwards;
     background:white;
+    position:relative;
+    z-index:2;
 }
 
 .page img{

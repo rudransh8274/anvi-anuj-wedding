@@ -1,218 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <title>Anvi & Anuj Wedding Invite</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    background: #f8f4ef;
-    overflow-x: hidden;
-    font-family: "Georgia", serif;
+body{
+    background:#f8f4ef;
+    overflow-x:hidden;
+    font-family:"Georgia", serif;
+    position:relative;
 }
 
-.container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-    padding: 40px 0;
+/* Loader */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:#f8f4ef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    font-size:1.2rem;
+    letter-spacing:2px;
+    color:#7b5a50;
+    transition:opacity 1s ease;
 }
 
-.page {
-    width: min(95vw, 900px);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeUp 1s ease forwards;
-    background: white;
+.fade-out{
+    opacity:0;
+    pointer-events:none;
 }
 
-.page img {
-    width: 100%;
-    display: block;
+/* Floating aesthetic elements */
+
+.floating-elements{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:5;
 }
 
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0px);
-    }
+.flower,
+.butterfly{
+    position:absolute;
+    top:-100px;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+    opacity:0.8;
 }
 
-.music-control {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.7);
-    border-radius: 999px;
-    padding: 12px 18px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.3s ease;
+.flower{
+    animation-name:fall;
 }
 
-.music-control:hover {
-    transform: scale(1.05);
+.butterfly{
+    animation-name:butterflyFly;
 }
 
-.loader {
-    position: fixed;
-    inset: 0;
-    background: #f8f4ef;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-}
+@keyframes fall{
 
-.fade-out {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 1s ease;
-}
-
-@media (max-width: 768px) {
-    .container {
-        gap: 24px;
-        padding: 20px 0;
+    0%{
+        transform:translateY(-100px) rotate(0deg);
+        opacity:0;
     }
 
-    .page {
-        width: 96vw;
-        border-radius: 12px;
+    10%{
+        opacity:0.9;
+    }
+
+    100%{
+        transform:translateY(120vh) rotate(360deg);
+        opacity:0;
     }
 }
+
+@keyframes butterflyFly{
+
+    0%{
+        transform:translate(-10vw,-10vh) scale(0.8);
+        opacity:0;
+    }
+
+    10%{
+        opacity:0.9;
+    }
+
+    50%{
+        transform:translate(50vw,40vh) scale(1);
+    }
+
+    100%{
+        transform:translate(110vw,90vh) scale(0.8);
+        opacity:0;
+    }
+}
+
+/* Main container */
+
+.container{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+    padding:40px 0;
+    position:relative;
+    z-index:10;
+}
+
+/* Pages */
+
+.page{
+    width:min(95vw,900px);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,0.15);
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeUp 1s ease forwards;
+    background:white;
+    backdrop-filter:blur(8px);
+}
+
+.page img{
+    width:100%;
+    display:block;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+    .container{
+        gap:24px;
+        padding:20px 0;
+    }
+
+    .page{
+        width:96vw;
+        border-radius:12px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="loader" id="loader">Loading Invitation...</div>
+<!-- Floating Elements -->
+<div class="floating-elements"></div>
 
-<div class="music-control" id="musicBtn">
-🔊 Music On
+<!-- Loader -->
+<div class="loader" id="loader">
+    Loading Invitation...
 </div>
 
-<audio id="bgMusic" autoplay loop>
+<!-- Background Music -->
+<audio id="bgMusic" autoplay loop playsinline>
     <source src="assets/background-music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Pages -->
 <div class="container">
 
-    <div class="page" style="animation-delay:0.0s;">
-        <img src="assets/page_1.jpg" alt="Wedding Invite Page 1">
+    <div class="page" style="animation-delay:0s;">
+        <img src="assets/page_1.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.08s;">
-        <img src="assets/page_2.jpg" alt="Wedding Invite Page 2">
+        <img src="assets/page_2.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.16s;">
-        <img src="assets/page_3.jpg" alt="Wedding Invite Page 3">
+        <img src="assets/page_3.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.24s;">
-        <img src="assets/page_4.jpg" alt="Wedding Invite Page 4">
+        <img src="assets/page_4.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.32s;">
-        <img src="assets/page_5.jpg" alt="Wedding Invite Page 5">
+        <img src="assets/page_5.jpg" alt="">
     </div>
-    
-    <div class="page" style="animation-delay:0.4s;">
-        <img src="assets/page_6.jpg" alt="Wedding Invite Page 6">
+
+    <div class="page" style="animation-delay:0.40s;">
+        <img src="assets/page_6.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.48s;">
-        <img src="assets/page_7.jpg" alt="Wedding Invite Page 7">
+        <img src="assets/page_7.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.56s;">
-        <img src="assets/page_8.jpg" alt="Wedding Invite Page 8">
+        <img src="assets/page_8.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.64s;">
-        <img src="assets/page_9.jpg" alt="Wedding Invite Page 9">
+        <img src="assets/page_9.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.72s;">
-        <img src="assets/page_10.jpg" alt="Wedding Invite Page 10">
+        <img src="assets/page_10.jpg" alt="">
     </div>
-    
-    <div class="page" style="animation-delay:0.8s;">
-        <img src="assets/page_11.jpg" alt="Wedding Invite Page 11">
+
+    <div class="page" style="animation-delay:0.80s;">
+        <img src="assets/page_11.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.88s;">
-        <img src="assets/page_12.jpg" alt="Wedding Invite Page 12">
+        <img src="assets/page_12.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:0.96s;">
-        <img src="assets/page_13.jpg" alt="Wedding Invite Page 13">
+        <img src="assets/page_13.jpg" alt="">
     </div>
-    
+
     <div class="page" style="animation-delay:1.04s;">
-        <img src="assets/page_14.jpg" alt="Wedding Invite Page 14">
+        <img src="assets/page_14.jpg" alt="">
     </div>
-    
+
 </div>
 
 <script>
-const music = document.getElementById('bgMusic');
-const musicBtn = document.getElementById('musicBtn');
+
+/* Loader */
+
 const loader = document.getElementById('loader');
 
 window.addEventListener('load', () => {
+
     setTimeout(() => {
         loader.classList.add('fade-out');
-    }, 1200);
+    }, 1500);
 
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                musicBtn.innerHTML = '🔊 Music On';
-            })
-            .catch(() => {
-                musicBtn.innerHTML = '▶ Tap for Music';
-            });
-    }
 });
 
-musicBtn.addEventListener('click', () => {
-    if (music.paused) {
-        music.play();
-        musicBtn.innerHTML = '🔊 Music On';
-    } else {
-        music.pause();
-        musicBtn.innerHTML = '🔇 Music Off';
+
+/* Background Music */
+
+const music = document.getElementById('bgMusic');
+
+music.volume = 1;
+
+async function playMusic(){
+
+    try{
+        await music.play();
     }
-});
+    catch(err){
+        console.log("Autoplay blocked");
+    }
+}
+
+window.addEventListener('load', playMusic);
+
+document.addEventListener('click', playMusic);
+document.addEventListener('scroll', playMusic);
+
+
+/* Floating Flowers */
+
+const floatingContainer = document.querySelector('.floating-elements');
+
+function createFlower(){
+
+    const flower = document.createElement('div');
+
+    flower.classList.add('flower');
+
+    const flowers = ['🌸','🌺','🌷','💮'];
+
+    flower.innerHTML =
+        flowers[Math.floor(Math.random() * flowers.length)];
+
+    flower.style.left = Math.random() * 100 + 'vw';
+
+    flower.style.fontSize =
+        (14 + Math.random() * 18) + 'px';
+
+    flower.style.animationDuration =
+        (8 + Math.random() * 8) + 's';
+
+    floatingContainer.appendChild(flower);
+
+    setTimeout(() => {
+        flower.remove();
+    }, 16000);
+}
+
+
+/* Butterflies */
+
+function createButterfly(){
+
+    const butterfly = document.createElement('div');
+
+    butterfly.classList.add('butterfly');
+
+    butterfly.innerHTML = '🦋';
+
+    butterfly.style.top =
+        Math.random() * 80 + 'vh';
+
+    butterfly.style.fontSize =
+        (20 + Math.random() * 10) + 'px';
+
+    butterfly.style.animationDuration =
+        (12 + Math.random() * 10) + 's';
+
+    floatingContainer.appendChild(butterfly);
+
+    setTimeout(() => {
+        butterfly.remove();
+    }, 22000);
+}
+
+
+/* Generate elements */
+
+setInterval(createFlower, 700);
+
+setInterval(createButterfly, 5000);
+
 </script>
 
 </body>

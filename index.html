@@ -212,8 +212,6 @@ SEAL
 
     font-family:
     "Palatino Linotype",
-    "Book Antiqua",
-    "URW Palladio L",
     serif;
 
     top:50%;
@@ -310,8 +308,6 @@ PAGES
     opacity:0;
 }
 
-/* Reveal */
-
 .page.reveal{
     opacity:1;
 
@@ -323,8 +319,6 @@ PAGES
     gentleFloat 6s ease-in-out infinite;
 }
 
-/* Hover */
-
 .page:hover{
     transform:
     translateY(-6px)
@@ -333,8 +327,6 @@ PAGES
     box-shadow:
     0 20px 50px rgba(0,0,0,0.22);
 }
-
-/* Images */
 
 .page img{
     width:100%;
@@ -348,8 +340,6 @@ PAGES
 .page.reveal img{
     transform:scale(1.02);
 }
-
-/* Glow Overlay */
 
 .page::before{
 
@@ -372,21 +362,202 @@ PAGES
 }
 
 /* =========================
-ANIMATIONS
+SAVE THE DATE
 ========================= */
 
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
+.save-date-wrapper{
+    width:min(95vw,900px);
 }
+
+.save-date-card{
+
+    position:relative;
+
+    width:100%;
+    min-height:420px;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        135deg,
+        #f5ecdb,
+        #efe2c5,
+        #f9f1df
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,0.16);
+
+    border:
+    1px solid rgba(198,155,89,0.25);
+}
+
+.save-date-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at top left,
+        rgba(255,255,255,0.6),
+        transparent 45%
+    );
+
+    pointer-events:none;
+
+    z-index:1;
+}
+
+.save-date-content{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+    padding:50px 30px;
+}
+
+.save-date-content h2{
+
+    font-size:4rem;
+
+    color:#b58a4b;
+
+    margin-bottom:16px;
+
+    font-weight:400;
+
+    letter-spacing:2px;
+
+    font-family:
+    "Palatino Linotype",
+    serif;
+}
+
+.save-date-content h3{
+
+    font-size:2rem;
+
+    color:#5d4a3d;
+
+    margin-bottom:42px;
+}
+
+/* Countdown */
+
+.countdown{
+
+    display:flex;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+}
+
+.time-box{
+
+    min-width:120px;
+
+    padding:22px 18px;
+
+    border-radius:18px;
+
+    background:
+    rgba(255,255,255,0.45);
+
+    backdrop-filter:blur(10px);
+
+    border:
+    1px solid rgba(255,255,255,0.55);
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,0.08);
+}
+
+.time-box span{
+
+    display:block;
+
+    font-size:2.6rem;
+
+    color:#b58a4b;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.time-box p{
+
+    color:#5d4a3d;
+
+    font-size:0.95rem;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+/* Scratch */
+
+#scratchCanvas{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:5;
+
+    cursor:grab;
+}
+
+.scratch-text{
+
+    position:absolute;
+
+    bottom:22px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:6;
+
+    color:#7a5a38;
+
+    font-size:1rem;
+
+    letter-spacing:1px;
+
+    background:
+    rgba(255,255,255,0.6);
+
+    padding:10px 18px;
+
+    border-radius:999px;
+}
+
+/* =========================
+ANIMATIONS
+========================= */
 
 @keyframes gentleFloat{
 
@@ -437,6 +608,26 @@ MOBILE
         width:96vw;
         border-radius:12px;
     }
+
+    .save-date-card{
+        min-height:520px;
+    }
+
+    .save-date-content h2{
+        font-size:2.6rem;
+    }
+
+    .save-date-content h3{
+        font-size:1.5rem;
+    }
+
+    .time-box{
+        min-width:42%;
+    }
+
+    .time-box span{
+        font-size:2rem;
+    }
 }
 
 </style>
@@ -444,15 +635,12 @@ MOBILE
 
 <body>
 
-<!-- Floating -->
 <div class="floating-elements"></div>
 
-<!-- Loader -->
 <div class="loader" id="loader">
     Loading Invitation...
 </div>
 
-<!-- Opening Screen -->
 <div class="opening-screen" id="openingScreen">
 
     <div class="envelope-wrapper">
@@ -482,17 +670,63 @@ MOBILE
 
 </div>
 
-<!-- Music -->
 <audio id="bgMusic" loop playsinline>
     <source src="assets/background-music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Main Content -->
 <div class="main-content" id="mainContent">
 
 <div class="container">
 
     <div class="page"><img src="assets/page_1.jpg"></div>
+
+    <!-- SAVE DATE -->
+    <div class="save-date-wrapper page reveal">
+
+        <div class="save-date-card">
+
+            <div class="save-date-content">
+
+                <h2>Save the Date</h2>
+
+                <h3>20th June 2026</h3>
+
+                <div class="countdown">
+
+                    <div class="time-box">
+                        <span id="days">00</span>
+                        <p>Days</p>
+                    </div>
+
+                    <div class="time-box">
+                        <span id="hours">00</span>
+                        <p>Hours</p>
+                    </div>
+
+                    <div class="time-box">
+                        <span id="minutes">00</span>
+                        <p>Minutes</p>
+                    </div>
+
+                    <div class="time-box">
+                        <span id="seconds">00</span>
+                        <p>Seconds</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <canvas id="scratchCanvas"></canvas>
+
+            <div class="scratch-text">
+                Scratch to Reveal ✨
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="page"><img src="assets/page_2.jpg"></div>
     <div class="page"><img src="assets/page_3.jpg"></div>
     <div class="page"><img src="assets/page_4.jpg"></div>
@@ -513,9 +747,7 @@ MOBILE
 
 <script>
 
-/* =========================
-LOADER
-========================= */
+/* LOADER */
 
 const loader = document.getElementById('loader');
 
@@ -527,17 +759,13 @@ window.addEventListener('load', () => {
 
 });
 
-/* =========================
-MUSIC
-========================= */
+/* MUSIC */
 
 const music = document.getElementById('bgMusic');
 
 music.volume = 1;
 
-/* =========================
-OPEN INVITE
-========================= */
+/* OPEN INVITE */
 
 const envelope = document.getElementById('envelope');
 const openInvite = document.getElementById('openInvite');
@@ -564,9 +792,7 @@ openInvite.addEventListener('click', async () => {
 
 });
 
-/* =========================
-SCROLL REVEAL
-========================= */
+/* SCROLL REVEAL */
 
 const pages = document.querySelectorAll('.page');
 
@@ -598,9 +824,7 @@ pages.forEach((page) => {
 
 });
 
-/* =========================
-FLOWERS
-========================= */
+/* FLOWERS */
 
 const floatingContainer =
     document.querySelector('.floating-elements');
@@ -634,9 +858,7 @@ function createFlower(){
     }, 16000);
 }
 
-/* =========================
-BUTTERFLIES
-========================= */
+/* BUTTERFLIES */
 
 function createButterfly(){
 
@@ -663,14 +885,182 @@ function createButterfly(){
     }, 22000);
 }
 
-/* Generate Elements */
-
 setInterval(createFlower,700);
-
 setInterval(createButterfly,5000);
+
+/* =========================
+COUNTDOWN
+========================= */
+
+const weddingDate =
+new Date("June 20, 2026 00:00:00").getTime();
+
+function updateCountdown(){
+
+    const now = new Date().getTime();
+
+    const distance =
+    weddingDate - now;
+
+    const days =
+    Math.floor(distance / (1000 * 60 * 60 * 24));
+
+    const hours =
+    Math.floor(
+        (distance % (1000 * 60 * 60 * 24))
+        / (1000 * 60 * 60)
+    );
+
+    const minutes =
+    Math.floor(
+        (distance % (1000 * 60 * 60))
+        / (1000 * 60)
+    );
+
+    const seconds =
+    Math.floor(
+        (distance % (1000 * 60))
+        / 1000
+    );
+
+    document.getElementById('days').innerHTML = days;
+    document.getElementById('hours').innerHTML = hours;
+    document.getElementById('minutes').innerHTML = minutes;
+    document.getElementById('seconds').innerHTML = seconds;
+}
+
+setInterval(updateCountdown,1000);
+
+updateCountdown();
+
+/* =========================
+SCRATCH CARD
+========================= */
+
+const canvas =
+document.getElementById("scratchCanvas");
+
+const ctx =
+canvas.getContext("2d");
+
+function resizeCanvas(){
+
+    canvas.width =
+    canvas.offsetWidth;
+
+    canvas.height =
+    canvas.offsetHeight;
+
+    createScratchLayer();
+}
+
+function createScratchLayer(){
+
+    const gradient =
+    ctx.createLinearGradient(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    gradient.addColorStop(0,"#c69b59");
+    gradient.addColorStop(0.5,"#e5c98a");
+    gradient.addColorStop(1,"#b58a4b");
+
+    ctx.globalCompositeOperation =
+    "source-over";
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+}
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+let isScratching = false;
+
+function scratch(x,y){
+
+    ctx.globalCompositeOperation =
+    "destination-out";
+
+    ctx.beginPath();
+
+    ctx.arc(x,y,30,0,Math.PI*2);
+
+    ctx.fill();
+}
+
+canvas.addEventListener(
+    "mousedown",
+    () => isScratching = true
+);
+
+canvas.addEventListener(
+    "mouseup",
+    () => isScratching = false
+);
+
+canvas.addEventListener(
+    "mousemove",
+    (e) => {
+
+        if(!isScratching) return;
+
+        const rect =
+        canvas.getBoundingClientRect();
+
+        scratch(
+            e.clientX - rect.left,
+            e.clientY - rect.top
+        );
+    }
+);
+
+canvas.addEventListener(
+    "touchstart",
+    () => isScratching = true
+);
+
+canvas.addEventListener(
+    "touchend",
+    () => isScratching = false
+);
+
+canvas.addEventListener(
+    "touchmove",
+    (e) => {
+
+        if(!isScratching) return;
+
+        e.preventDefault();
+
+        const rect =
+        canvas.getBoundingClientRect();
+
+        const touch =
+        e.touches[0];
+
+        scratch(
+            touch.clientX - rect.left,
+            touch.clientY - rect.top
+        );
+    },
+    { passive:false }
+);
 
 </script>
 
 </body>
 </html>
-

@@ -367,14 +367,21 @@ SAVE THE DATE
 
 .save-date-wrapper{
     width:min(95vw,900px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:-10px;
+    margin-bottom:10px;
 }
 
-.save-date-card{
+.scratch-card{
 
     position:relative;
 
     width:100%;
-    min-height:420px;
+    max-width:900px;
+
+    height:220px;
 
     border-radius:22px;
 
@@ -383,142 +390,120 @@ SAVE THE DATE
     background:
     linear-gradient(
         135deg,
-        #f5ecdb,
-        #efe2c5,
-        #f9f1df
+        #d8c19a,
+        #c69b59,
+        #f1e0b8
     );
+
+    box-shadow:
+    0 12px 40px rgba(0,0,0,0.18);
 
     display:flex;
     align-items:center;
     justify-content:center;
-
-    box-shadow:
-    0 20px 60px rgba(0,0,0,0.16);
-
-    border:
-    1px solid rgba(198,155,89,0.25);
 }
 
-.save-date-card::before{
-
-    content:"";
+.scratch-content{
 
     position:absolute;
-
     inset:0;
 
-    background:
-    radial-gradient(
-        circle at top left,
-        rgba(255,255,255,0.6),
-        transparent 45%
-    );
-
-    pointer-events:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
     z-index:1;
-}
 
-.save-date-content{
-
-    position:relative;
-
-    z-index:2;
+    background:
+    linear-gradient(
+        to bottom,
+        #f7f1e4,
+        #efe4cf
+    );
 
     text-align:center;
-
-    padding:50px 30px;
 }
 
-.save-date-content h2{
+.save-title{
 
-    font-size:4rem;
+    font-size:2.2rem;
 
-    color:#b58a4b;
-
-    margin-bottom:16px;
-
-    font-weight:400;
+    color:#8b6b3f;
 
     letter-spacing:2px;
+
+    margin-bottom:10px;
 
     font-family:
     "Palatino Linotype",
     serif;
 }
 
-.save-date-content h3{
+.save-date{
 
-    font-size:2rem;
+    font-size:3rem;
 
-    color:#5d4a3d;
+    color:#4b2e1f;
 
-    margin-bottom:42px;
+    font-weight:600;
+
+    margin-bottom:28px;
 }
-
-/* Countdown */
 
 .countdown{
 
     display:flex;
+    gap:14px;
 
-    gap:18px;
-
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
 
     justify-content:center;
+    align-items:center;
 }
 
 .time-box{
 
-    min-width:120px;
-
-    padding:22px 18px;
-
-    border-radius:18px;
+    min-width:95px;
 
     background:
-    rgba(255,255,255,0.45);
+    rgba(255,255,255,0.72);
 
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(8px);
 
-    border:
-    1px solid rgba(255,255,255,0.55);
+    border-radius:16px;
+
+    padding:12px 10px;
 
     box-shadow:
-    0 8px 25px rgba(0,0,0,0.08);
+    0 5px 15px rgba(0,0,0,0.08);
 }
 
 .time-box span{
 
     display:block;
 
-    font-size:2.6rem;
+    font-size:2rem;
 
-    color:#b58a4b;
+    color:#6e5234;
 
-    font-weight:700;
-
-    margin-bottom:8px;
+    font-weight:bold;
 }
 
 .time-box p{
 
-    color:#5d4a3d;
+    margin-top:4px;
 
-    font-size:0.95rem;
+    font-size:0.9rem;
 
-    letter-spacing:2px;
+    letter-spacing:1px;
 
-    text-transform:uppercase;
+    color:#8a6b45;
 }
-
-/* Scratch */
 
 #scratchCanvas{
 
     position:absolute;
-
     inset:0;
 
     width:100%;
@@ -526,33 +511,63 @@ SAVE THE DATE
 
     z-index:5;
 
-    cursor:grab;
+    cursor:crosshair;
 }
 
 .scratch-text{
 
     position:absolute;
 
-    bottom:22px;
-
+    top:50%;
     left:50%;
 
-    transform:translateX(-50%);
+    transform:translate(-50%,-50%);
 
     z-index:6;
 
-    color:#7a5a38;
+    color:white;
 
-    font-size:1rem;
+    font-size:1.6rem;
 
-    letter-spacing:1px;
+    letter-spacing:2px;
 
-    background:
-    rgba(255,255,255,0.6);
+    pointer-events:none;
 
-    padding:10px 18px;
+    font-weight:600;
 
-    border-radius:999px;
+    text-shadow:
+    0 3px 10px rgba(0,0,0,0.3);
+}
+
+.party-popper{
+
+    position:absolute;
+
+    font-size:28px;
+
+    animation:popperBlast 1.4s ease forwards;
+
+    pointer-events:none;
+
+    z-index:20;
+}
+
+@keyframes popperBlast{
+
+    0%{
+        transform:translateY(0px) scale(0.5);
+        opacity:1;
+    }
+
+    100%{
+        transform:
+        translateY(-140px)
+        translateX(var(--x))
+        rotate(360deg)
+        scale(1.5);
+
+        opacity:0;
+    }
 }
 
 /* =========================
@@ -609,24 +624,43 @@ MOBILE
         border-radius:12px;
     }
 
-    .save-date-card{
-        min-height:520px;
+    .scratch-card{
+        height:160px;
     }
 
-    .save-date-content h2{
-        font-size:2.6rem;
+    .save-title{
+        font-size:1.3rem;
+        margin-bottom:4px;
     }
 
-    .save-date-content h3{
-        font-size:1.5rem;
+    .save-date{
+        font-size:1.8rem;
+        margin-bottom:14px;
+    }
+
+    .countdown{
+        gap:6px;
     }
 
     .time-box{
-        min-width:42%;
+
+        min-width:62px;
+
+        padding:8px 6px;
+
+        border-radius:12px;
     }
 
     .time-box span{
-        font-size:2rem;
+        font-size:1.1rem;
+    }
+
+    .time-box p{
+        font-size:0.6rem;
+    }
+
+    .scratch-text{
+        font-size:1rem;
     }
 }
 
@@ -680,37 +714,42 @@ MOBILE
 
     <div class="page"><img src="assets/page_1.jpg"></div>
 
-    <!-- SAVE DATE -->
-    <div class="save-date-wrapper page reveal">
+    <!-- SAVE THE DATE -->
 
-        <div class="save-date-card">
+    <div class="save-date-wrapper">
 
-            <div class="save-date-content">
+        <div class="scratch-card" id="scratchCard">
 
-                <h2>Save the Date</h2>
+            <div class="scratch-content">
 
-                <h3>20th June 2026</h3>
+                <div class="save-title">
+                    Save The Date
+                </div>
+
+                <div class="save-date">
+                    20 June 2026
+                </div>
 
                 <div class="countdown">
 
                     <div class="time-box">
                         <span id="days">00</span>
-                        <p>Days</p>
+                        <p>DAYS</p>
                     </div>
 
                     <div class="time-box">
                         <span id="hours">00</span>
-                        <p>Hours</p>
+                        <p>HOURS</p>
                     </div>
 
                     <div class="time-box">
                         <span id="minutes">00</span>
-                        <p>Minutes</p>
+                        <p>MINUTES</p>
                     </div>
 
                     <div class="time-box">
                         <span id="seconds">00</span>
-                        <p>Seconds</p>
+                        <p>SECONDS</p>
                     </div>
 
                 </div>
@@ -747,7 +786,9 @@ MOBILE
 
 <script>
 
-/* LOADER */
+/* =========================
+LOADER
+========================= */
 
 const loader = document.getElementById('loader');
 
@@ -759,13 +800,17 @@ window.addEventListener('load', () => {
 
 });
 
-/* MUSIC */
+/* =========================
+MUSIC
+========================= */
 
 const music = document.getElementById('bgMusic');
 
 music.volume = 1;
 
-/* OPEN INVITE */
+/* =========================
+OPEN INVITE
+========================= */
 
 const envelope = document.getElementById('envelope');
 const openInvite = document.getElementById('openInvite');
@@ -792,7 +837,9 @@ openInvite.addEventListener('click', async () => {
 
 });
 
-/* SCROLL REVEAL */
+/* =========================
+SCROLL REVEAL
+========================= */
 
 const pages = document.querySelectorAll('.page');
 
@@ -824,7 +871,9 @@ pages.forEach((page) => {
 
 });
 
-/* FLOWERS */
+/* =========================
+FLOWERS
+========================= */
 
 const floatingContainer =
     document.querySelector('.floating-elements');
@@ -858,7 +907,9 @@ function createFlower(){
     }, 16000);
 }
 
-/* BUTTERFLIES */
+/* =========================
+BUTTERFLIES
+========================= */
 
 function createButterfly(){
 
@@ -886,21 +937,21 @@ function createButterfly(){
 }
 
 setInterval(createFlower,700);
+
 setInterval(createButterfly,5000);
 
 /* =========================
 COUNTDOWN
 ========================= */
 
-const weddingDate =
+const targetDate =
 new Date("June 20, 2026 00:00:00").getTime();
 
 function updateCountdown(){
 
     const now = new Date().getTime();
 
-    const distance =
-    weddingDate - now;
+    const distance = targetDate - now;
 
     const days =
     Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -929,9 +980,9 @@ function updateCountdown(){
     document.getElementById('seconds').innerHTML = seconds;
 }
 
-setInterval(updateCountdown,1000);
-
 updateCountdown();
+
+setInterval(updateCountdown,1000);
 
 /* =========================
 SCRATCH CARD
@@ -943,16 +994,29 @@ document.getElementById("scratchCanvas");
 const ctx =
 canvas.getContext("2d");
 
+const scratchCard =
+document.getElementById("scratchCard");
+
+let isDrawing = false;
+let revealed = false;
+
 function resizeCanvas(){
 
     canvas.width =
-    canvas.offsetWidth;
+    scratchCard.offsetWidth;
 
     canvas.height =
-    canvas.offsetHeight;
+    scratchCard.offsetHeight;
 
     createScratchLayer();
 }
+
+resizeCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
 
 function createScratchLayer(){
 
@@ -964,9 +1028,9 @@ function createScratchLayer(){
         canvas.height
     );
 
-    gradient.addColorStop(0,"#c69b59");
-    gradient.addColorStop(0.5,"#e5c98a");
-    gradient.addColorStop(1,"#b58a4b");
+    gradient.addColorStop(0,"#c8a46a");
+    gradient.addColorStop(0.5,"#b58b4f");
+    gradient.addColorStop(1,"#e3c48f");
 
     ctx.globalCompositeOperation =
     "source-over";
@@ -979,16 +1043,27 @@ function createScratchLayer(){
         canvas.width,
         canvas.height
     );
+
+    for(let i=0;i<180;i++){
+
+        ctx.fillStyle =
+        `rgba(255,255,255,${
+            Math.random() * 0.25
+        })`;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            Math.random() * canvas.width,
+            Math.random() * canvas.height,
+            Math.random() * 2,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    }
 }
-
-resizeCanvas();
-
-window.addEventListener(
-    "resize",
-    resizeCanvas
-);
-
-let isScratching = false;
 
 function scratch(x,y){
 
@@ -997,26 +1072,130 @@ function scratch(x,y){
 
     ctx.beginPath();
 
-    ctx.arc(x,y,30,0,Math.PI*2);
+    ctx.arc(x,y,28,0,Math.PI*2);
 
     ctx.fill();
 }
 
+function revealFully(){
+
+    if(revealed) return;
+
+    revealed = true;
+
+    canvas.style.transition =
+    "opacity 1s ease";
+
+    canvas.style.opacity = "0";
+
+    document.querySelector(
+        '.scratch-text'
+    ).style.display = 'none';
+
+    createPartyPopper();
+
+    setTimeout(() => {
+
+        canvas.style.display = "none";
+
+    },1000);
+}
+
+function createPartyPopper(){
+
+    const emojis =
+    ['🎉','✨','🎊','💖','🌸'];
+
+    for(let i=0;i<40;i++){
+
+        const popper =
+        document.createElement('div');
+
+        popper.classList.add(
+            'party-popper'
+        );
+
+        popper.innerHTML =
+        emojis[
+            Math.floor(
+                Math.random() *
+                emojis.length
+            )
+        ];
+
+        popper.style.left =
+        Math.random() * 100 + '%';
+
+        popper.style.top =
+        (50 + Math.random()*20) + '%';
+
+        popper.style.setProperty(
+            '--x',
+            (Math.random()*240 - 120)+'px'
+        );
+
+        scratchCard.appendChild(
+            popper
+        );
+
+        setTimeout(() => {
+            popper.remove();
+        },1500);
+    }
+}
+
+function checkReveal(){
+
+    const imageData =
+    ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    let transparent = 0;
+
+    for(let i=3;i<imageData.data.length;i+=4){
+
+        if(imageData.data[i] < 128){
+            transparent++;
+        }
+    }
+
+    const percent =
+    transparent /
+    (canvas.width * canvas.height);
+
+    if(percent > 0.10){
+
+        revealFully();
+    }
+}
+
 canvas.addEventListener(
     "mousedown",
-    () => isScratching = true
+    () => {
+        isDrawing = true;
+    }
 );
 
 canvas.addEventListener(
     "mouseup",
-    () => isScratching = false
+    () => {
+
+        isDrawing = false;
+
+        checkReveal();
+    }
 );
 
 canvas.addEventListener(
     "mousemove",
     (e) => {
 
-        if(!isScratching) return;
+        if(!isDrawing || revealed)
+            return;
 
         const rect =
         canvas.getBoundingClientRect();
@@ -1030,19 +1209,27 @@ canvas.addEventListener(
 
 canvas.addEventListener(
     "touchstart",
-    () => isScratching = true
+    () => {
+        isDrawing = true;
+    }
 );
 
 canvas.addEventListener(
     "touchend",
-    () => isScratching = false
+    () => {
+
+        isDrawing = false;
+
+        checkReveal();
+    }
 );
 
 canvas.addEventListener(
     "touchmove",
     (e) => {
 
-        if(!isScratching) return;
+        if(!isDrawing || revealed)
+            return;
 
         e.preventDefault();
 
@@ -1056,8 +1243,7 @@ canvas.addEventListener(
             touch.clientX - rect.left,
             touch.clientY - rect.top
         );
-    },
-    { passive:false }
+    }
 );
 
 </script>
